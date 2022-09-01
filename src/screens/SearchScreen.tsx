@@ -1,12 +1,20 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import { SearchBar } from '../components'
+import{ API_KEY, CLIENT_ID } from 'react-native-dotenv'
 
 const SearchScreen = () => {
+  console.log()
+  const [term, setTerm] = useState('')
   return (
     <View style={styles.container}>
       <Text style={styles.H1_BOLD}>Search Screen</Text>
-      <SearchBar />
+      <SearchBar 
+        term={term}
+        onTermChange={(newTerm: React.SetStateAction<string>) => setTerm(newTerm)}
+        onTermSubmit={() => console.log('term was submitted')}
+      />
+      <Text>{term}</Text>
     </View>
   )
 }
