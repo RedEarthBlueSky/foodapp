@@ -1,20 +1,36 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React, { useState } from 'react'
-import { SearchBar } from '../components'
-import{ API_KEY, CLIENT_ID } from 'react-native-dotenv'
+import React, { useState, useEffect } from 'react'
 
-const SearchScreen = () => {
-  console.log()
+import { SearchBar, ResultsList } from '../components'
+import yelp from '../api/yelp'
+import useRestaurants from '../hooks/useRestaurants'
+
+interface restaurantProps {
+  searchApi: (searchTerm: string) => Promise<void>,
+  restaurants: [],
+  errorMessage: string,
+}
+
+const SearchScreen = ():JSX.Element => {
+  console.log('Hi there again')
   const [term, setTerm] = useState('')
+
+  const [searchApi, restaurants, errorMessage] = useRestaurants
+
   return (
     <View style={styles.container}>
       <Text style={styles.H1_BOLD}>Search Screen</Text>
       <SearchBar 
         term={term}
-        onTermChange={(newTerm: React.SetStateAction<string>) => setTerm(newTerm)}
-        onTermSubmit={() => console.log('term was submitted')}
+        onTermChange={(newValue: React.SetStateAction<string>) => setTerm(newValue)}
+        onTermSubmit={() => searchApi(term)}
       />
-      <Text>{term}</Text>
+      {errorMessage ?
+        <Text>{errorMessage}</Text>
+        : null
+      }
+      <Text>We have found {restaurants.length} results</Text>
+      <ResultsList />
     </View>
   )
 }
@@ -27,8 +43,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     flex: 1,
     justifyContent: 'flex-start',
-    padding: 10,
-    
+    padding: 10, 
   },
   H1_BOLD: {
     fontSize: 32,
