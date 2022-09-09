@@ -1,7 +1,11 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-const ResultsList = ({ title, }) => {
+interface resultsProps {
+  title: string,
+}
+
+const ResultsList = ({ title, }: resultsProps): JSX.Element => {
   return (
     <View>
       <Text style={styles.H3_BOLD}>{title}</Text>

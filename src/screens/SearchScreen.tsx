@@ -33,7 +33,7 @@ const SearchScreen = ():JSX.Element => {
       }
       <Text>We have found {restaurants.length} results</Text>
       <ResultsList 
-        title={'Cost Effective'}
+        title={'Cost Effective Budget'}
       />
       <ResultsList
         title={'Bit Pricier'}
