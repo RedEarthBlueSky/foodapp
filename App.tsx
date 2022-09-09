@@ -1,5 +1,6 @@
 import { createAppContainer } from 'react-navigation'
 import { createStackNavigator } from 'react-navigation-stack'
+import "babel-polyfill"
 
 import { SearchScreen } from './src/screens'
 

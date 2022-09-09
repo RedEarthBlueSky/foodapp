@@ -5,7 +5,9 @@ export default () => {
   const [restaurants, setRestaurants] = useState([])
   const [errorMessage, setErrorMessage] = useState('')
 
-  const searchApi = async (searchTerm: string) => {
+  type searchProps = (searchTerm: string) => Promise<void>
+
+  const searchApi: searchProps = async (searchTerm: string) => {
     try {
       const response = await yelp.get('/search', {
         params: {
